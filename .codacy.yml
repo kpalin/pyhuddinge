@@ -1,0 +1,8 @@
+---
+exclude_paths:
+  - 'pyhuddinge/_version.py'
+  - 'tests/**/*'
+  - 'tests/*'
+  - 'benchmarks/**/*'
+  - 'setup.py'
+  - 'versioneer.py'

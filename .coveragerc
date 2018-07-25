@@ -1,0 +1,7 @@
+[report]
+omit =
+    setup.py
+    pyhuddinge/__main__.py
+    pyhuddinge/_version.py
+    versioneer.py
+    tests/*
