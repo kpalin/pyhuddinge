@@ -1,0 +1,3 @@
+[submodule "src/MODER"]
+	path = src/MODER
+	url = https://github.com/jttoivon/MODER
