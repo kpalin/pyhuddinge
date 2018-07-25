@@ -21,6 +21,7 @@ requirements:
     - scipy
     - numpy
     - pandas
+    - boost
   run:
     - python
     # dependencies are defined in setup.py
