@@ -1,5 +1,6 @@
 import ctypes
-hlib = ctypes.cdll.LoadLibrary("src/libpyhuddingec.so")
+
+hlib = ctypes.cdll.LoadLibrary("libpyhuddingec.so")
 hlib.pyhuddinge_distance.argtypes = [ctypes.c_char_p,ctypes.c_char_p]
 
 def huddinge_distance(x,y):

@@ -12,4 +12,4 @@ set -o pipefail
 
 python setup.py install --single-version-externally-managed --record=record.txt
 make -C src/ libpyhuddingec.so
-cp lib/libpyhuddingec.so ${PREFIX}/libpyhuddingec.so
+cp src/libpyhuddingec.so ${PREFIX}/lib/libpyhuddingec.so

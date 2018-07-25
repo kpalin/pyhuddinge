@@ -1,9 +1,12 @@
-from setuptools import setup
+from setuptools import setup,Extension
 import versioneer
 
 requirements = [
+    "numpy","scipy","pandas","six"
     # package requirements go here
 ]
+
+
 
 setup(
     name='pyhuddinge',
@@ -14,11 +17,7 @@ setup(
     author_email='kimmo.palin at helsinki.fi',
     url='https://github.com/kpalin/pyhuddinge',
     packages=['pyhuddinge'],
-    entry_points={
-        'console_scripts': [
-            'pyhuddinge=pyhuddinge.cli:cli'
-        ]
-    },
+    #ext_modules = [moder_ext],
     install_requires=requirements,
     keywords='pyhuddinge',
     classifiers=[
