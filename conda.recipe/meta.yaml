@@ -21,6 +21,7 @@ requirements:
     - scipy
     - numpy
     - pandas
+    - boost-cpp
     - boost
   run:
     - python
