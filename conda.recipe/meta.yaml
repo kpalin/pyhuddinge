@@ -22,7 +22,7 @@ requirements:
     - numpy
     - pandas
     - boost-cpp
-    - boost
+    - libboost
   run:
     - python
     # dependencies are defined in setup.py
