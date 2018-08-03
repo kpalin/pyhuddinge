@@ -24,12 +24,13 @@ requirements:
     - pandas
 #    - boost-cpp
     - libboost =1.67.0
-    - {{ compiler('cxx') }}
-    #- libstdcxx-ng
-    #- libgcc-ng
+    #- {{ compiler('cxx') }}
+    - libstdcxx-ng
+    - libgcc-ng
   run:
     - python
-    #- libboost==1.63
+    - libstdcxx-ng
+    - libgcc-ng
     # dependencies are defined in setup.py
     {% for dep in data['install_requires'] %}
     - {{ dep.lower() }}
