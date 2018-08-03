@@ -1,28 +1,33 @@
-# Config file for automatic testing at travis-ci.org
-
 language: python
 python:
-  - "2.7"
-  - "3.6"
-
+- '2.7'
+- '3.6'
 install:
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes
-  - conda update -q conda
-  - conda install conda-build anaconda-client pytest pytest-cov
-  - conda config --set auto_update_conda no
-  - conda build conda.recipe --no-test
-  - conda install --use-local pyhuddinge
-  - conda info -a
+- if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+  -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  -O miniconda.sh; fi
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes
+- conda update -q conda
+- conda install conda-build anaconda-client pytest pytest-cov
+- conda config --set auto_update_conda no
+- conda build conda.recipe --no-test
+- conda info -a
+- conda install --use-local pyhuddinge
 script:
-  - pytest -v --color=yes --cov=pyhuddinge tests
+- pytest -v --color=yes --cov=pyhuddinge tests
 after_success:
-  - conda install -c conda-forge codecov
-  - codecov
+- conda install -c conda-forge codecov
+- codecov
+deploy:
+  provider: releases
+  api_key:
+    secure: Zkrf11B57QNrDyNm2xM1aDjTMYeTgEVNkZ7jGwBGu7oMDDy++gNE4/Sw6yPQuT7LWxbh0wVWjgBbgAeFGDhiUs3a3gpdXZFZ+yV6QRkOLWefpKf++qigU0nXaAcz1vASocGxxxtyp5oBqne77UW+IxDtNV0E9EiCFw6CLSKxoYbZcEk8otxo2nlqmR7lu1eDiYACTUfEBZGLXLQHEGbX4D5YYMDrmmAWc1ItGPLjkaV+hK8D/p6bKj5s3pxVs6YGbsLdGXG5xyctY9K5YLla4qZNPGuaHud6VPzEOaOjkjJ/azIUPwa7JWFHuhLH8nBQMhV/0C+uA2/7KopI9/vhtZboYHsuLWzVdFQuDCammT1y3w8snahCKACAgfd67B2MSp3BIP8ZPJEJRlcwhpDbuwuvxe/namX/5XNGyp8XU0yoJ/yj8lHVTIsQMcZwKoyg6W4P9SPatLPD9HIykr7L1tFBMQdNNGObBMCIq6uEvEBO3UCM9w28Mikkov9A4R4ctF/gWA07GXTu1AB+c3jWUUm+2dGqXn/U8abN3gB6h1H++w5sl1DCLruTa4qUuYK5fQqnA9JS5TxJS2HQrR5NJXDde2AJyS8kp1ebyH7tLsHOdtSQn8SdwYNcg7N9zAiDuh6ewxe8lmpmgpH9qWHsqimN+38HE9n/zfzDVxOwq58=
+  file: pyhuddinge-*.tar.bz2
+  skip_cleanup: true
+  on:
+    repo: kpalin/pyhuddinge
+    branch: releases
+    tags: true
