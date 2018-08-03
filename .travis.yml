@@ -5,6 +5,9 @@ python:
   - "2.7"
   - "3.6"
 sudo: required
+env:
+  global:
+      secure: "LWkB7192QxEtRiMoRySlhACrI42f3C/UB3XvGp04h7AAm/RWy1CnuA4j6CZ1Z6f5uGQ3kb/bGXHr7pQOEO1YBTqQsR45nH2z9/iojuWuP+uSSzL6Q0HWR9aHyjUwD/lmHUGDMYL/R1MEjRkb7mQbUCak98m4VOHrfZGky6e21qE814uavDpQlzk99zGpf6gvWVSS9AMWKNtqx4uTOe1Rjtlb+ZT1Mc6iIma+uHT0uouVKIX9Z7A6fZ5NKSopqAY+W0Cr2petVI+vTauLKRhiGSJOwjX58Yy1zfgpDkVEV47csFUNnW1k9WGhO3PmmnH9nB+wPgU9HIQKzOvmufwXgUSIm6w6lKdc4tPSwV5v9IhUHLl+PqkRXx3FyUpiF+L2ceEnnK+UGPRlxMc+J7jJHb+ziM6r4h4gsqTVzQ0sMjpRrCfdwG3T9kTsbsXC2W6S4c90USgS/gyi7ibdk1/ZAqv8hLvub7t5L1SPK435s9Xm5MyFwDFH2Bkw8CsWBKE6xbALm9bgXZZXCZ6RK66c8b9EEfgNk+eElK77QlFxyA/QOECW6S1ghgkmZ/ngy3MLt6QwM+xdQLXoElxnZ54iteGWBRoTAqqIVZ4ZJXwXfHTN7J2XR7I//P5i2h/0jDEwUAnKw2Iih2c+sQR3nen5s6OSzlAfqSj/rqig89XG58E="
 install:
   - sudo apt-get install libboost-dev
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
@@ -18,7 +21,8 @@ install:
   - conda config --set always_yes yes
   - conda update -q conda
   - conda install conda-build anaconda-client pytest pytest-cov hypothesis
-  - conda config --set auto_update_conda no
+  - anaconda login --username kpalin --password $PASSWORD
+  #- conda config --set auto_update_conda no
   - conda install conda-verify
   - conda build conda.recipe --no-test
   - conda install --use-local pyhuddinge
