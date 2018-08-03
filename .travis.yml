@@ -19,6 +19,7 @@ install:
   - conda update -q conda
   - conda install conda-build anaconda-client pytest pytest-cov hypothesis
   - conda config --set auto_update_conda no
+  - conda install conda-verify
   - conda build conda.recipe --no-test
   - conda install --use-local pyhuddinge
   - conda info -a
