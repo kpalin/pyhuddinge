@@ -22,7 +22,8 @@ install:
   - conda update -q conda
   - conda install conda-build anaconda-client pytest pytest-cov hypothesis
   - anaconda login --username kpalin --password $PASSWORD
-  #- conda config --set auto_update_conda no
+  - conda config --set anaconda_upload yes
+  - conda config --set auto_update_conda no
   - conda install conda-verify
   - conda build conda.recipe --no-test
   - conda install --use-local pyhuddinge
