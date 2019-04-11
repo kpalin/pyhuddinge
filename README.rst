@@ -11,4 +11,6 @@ pyhuddinge
    :target: https://codecov.io/gh/kpalin/pyhuddinge
 
 
-Python interface for computing huddinge distance from python code
+Python interface for computing huddinge distance from python code. This version
+does not compute huddinge distance for gapped kmers (since underlying MODER does
+not either)

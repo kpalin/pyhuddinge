@@ -23,7 +23,7 @@ requirements:
     - numpy
     - pandas
 #    - boost-cpp
-    - libboost =1.67.0
+    - libboost >=1.67.0
     #- {{ compiler('cxx') }}
     - libstdcxx-ng
     - libgcc-ng
