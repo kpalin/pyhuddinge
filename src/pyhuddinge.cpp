@@ -2,6 +2,8 @@
 #include "MODER/huddinge.hpp"
 #include "MODER/common.hpp"
 
+#include <python3.6m/Python.h>
+
 extern "C" int pyhuddinge_distance(const char *x, const char *y,const bool reverse_complements)
 {  // Compute huddinge distance between x and y. If reverse_complements, compute as minimum of the distances
     std::string cppx(x);
@@ -65,5 +67,31 @@ extern "C" int pyhuddinge_all_pairs_distance(void *distances,
         }
     }
     return 1;
+}
+
+extern "C" PyObject *pyhuddinge_neighbourhood(const char *kmer,
+    int max_dist,int min_kmer_len,int max_kmer_len, int max_gapped_len)
+{
+    /* Compute sequence neighbourhood of kmer up to huddinge distance max_dist.
+    The considered kmers are form min_kmer_len to max_kmer_len long. 
+    max_gapped_len is something similar to max_kmer_len but I'm not sure.
+*/
+    const std::string kmer_s(kmer);
+    PyObject* data = PyDict_New();
+
+    int h=max_dist, L=max_gapped_len;
+
+    huddinge_neighbourhood neighbour_obj(kmer_s, h,L,min_kmer_len,max_kmer_len);
+    std::vector<boost::tuple<std::string,int> > neighbours = neighbour_obj.compute(true);
+
+    for(std::vector<boost::tuple<std::string,int> >::iterator it = neighbours.begin(); it != neighbours.end(); ++it) {
+        const char *n_kmer = it->get<0>().c_str();
+        const long dist = it->get<1>();
+        
+        PyMapping_SetItemString(data,n_kmer,
+                PyLong_FromLong(dist));
+    }
+    
+    return data;
 }
 

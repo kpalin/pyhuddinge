@@ -1,5 +1,5 @@
 from hypothesis import given,settings
-from hypothesis.strategies import text,lists,booleans
+from hypothesis.strategies import text,lists,booleans,integers
 import pytest
 
 ALPHABET=list("acgt")
@@ -215,3 +215,31 @@ def test_all_huddinge_pairs_shuffle(kmers):
     assert (Dsq1==reordered2).all().all()
     
  
+@given(text(ALPHABET,min_size=1,max_size=15))
+def test_huddingeneighbor(x):
+    import pyhuddinge as ph
+    x=x.upper()
+    
+    h_neigh = ph.huddinge_neighbours(x)
+    assert x in h_neigh
+    assert len(h_neigh) > 2
+
+#Slow test so only few runs.
+@given(text(ALPHABET,min_size=1,max_size=5),integers(min_value=1,max_value=4))
+def test_huddingeneighbors_more_by_distance(x,d):
+
+    import pyhuddinge as ph
+    x = x.upper()
+    
+    h_neigh = ph.huddinge_neighbours(x,max_dist=d)
+    h_neigh_bigger = ph.huddinge_neighbours(x,max_dist=d+1)
+    assert set(h_neigh).issubset(set(h_neigh_bigger))
+
+    for k in h_neigh_bigger:
+        if k in h_neigh:
+                assert h_neigh[k] == h_neigh_bigger[k]
+                assert h_neigh[k] <=d
+        else:
+                assert h_neigh_bigger[k] == d+1
+
+

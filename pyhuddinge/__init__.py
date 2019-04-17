@@ -1,2 +1,2 @@
-from .pyhuddinge import huddinge_distance, all_pairs_huddinge_distance, squareform
+from .pyhuddinge import huddinge_distance, all_pairs_huddinge_distance, squareform, huddinge_neighbours
 
