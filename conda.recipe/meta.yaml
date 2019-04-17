@@ -41,11 +41,11 @@ test:
   source_files:
     - tests
   requires:
-    - nose
+    - pytest
     - hypothesis
 
   commands:
-    - nosetests tests 
+    - pytest tests 
 
 about:
   home: https://github.com/kpalin/pyhuddinge

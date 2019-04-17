@@ -176,7 +176,7 @@ def test_all_huddinge_pairs1():
     assert len(D) == len(kmers)*(len(kmers)-1)/2
     assert min(D)>0
 
-@settings(deadline=1000)
+@settings(deadline=None)
 @given(lists(text(ALPHABET,min_size=1,max_size=15).filter(lambda kmer:len(kmer.strip("n"))>0),min_size=1,max_size=20,unique=True),booleans())
 def test_all_huddinge_pairs_concordance(kmers,reverse_complements):
     import pyhuddinge as ph
@@ -195,7 +195,7 @@ def test_all_huddinge_pairs_concordance(kmers,reverse_complements):
 
     
  
-@settings(deadline=1000)
+@settings(deadline=None)
 @given(lists(text(ALPHABET,min_size=1,max_size=15).filter(lambda kmer:len(kmer.strip("n"))>0),min_size=1,
     max_size=20,unique=True))
 def test_all_huddinge_pairs_shuffle(kmers):
